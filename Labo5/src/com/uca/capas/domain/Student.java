@@ -77,6 +77,13 @@ public class Student{
 	public void setbActivo(Boolean bActivo) {
 		this.bActivo = bActivo;
 	}
-
 	
+
+	//Funciones delegate
+	public String getActivoDelegate() {
+		if(this.bActivo == null) return "";
+		else {
+			return bActivo == true ?"Activo":"Inactivo";
+		}
+	}	
 }

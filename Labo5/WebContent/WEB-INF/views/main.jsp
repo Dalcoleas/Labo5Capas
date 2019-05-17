@@ -21,7 +21,7 @@
 					<td>${students.sName}</td>
 					<td>${students.lName}</td>
 					<td>${students.sAge}</td>
-					<td>${students.bActivo}</td>
+					<td>${students.activoDelegate}</td>
 				</tr>
 			</c:forEach>
 	</table>

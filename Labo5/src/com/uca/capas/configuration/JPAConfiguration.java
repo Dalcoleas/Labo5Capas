@@ -16,16 +16,14 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
-@EnableTransactionManagement
-@EnableJpaRepositories(basePackages = "com.uca.capas.dao")
 public class JPAConfiguration {
 	@Bean
 	public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
 		LocalContainerEntityManagerFactoryBean em = new
 				LocalContainerEntityManagerFactoryBean();
 				em.setDataSource(dataSource());
-				em.setPersistenceUnitName("persistencia");
-				em.setPackagesToScan("com.uca.capas.dao");
+				em.setPersistenceUnitName("capas");
+				em.setPackagesToScan("com.uca.capas.domain");
 				
 				JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
 				em.setJpaVendorAdapter(vendorAdapter);

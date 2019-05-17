@@ -7,9 +7,11 @@ import javax.persistence.Query;
 import javax.persistence.EntityManager;
 
 import org.springframework.dao.DataAccessException;
+import org.springframework.stereotype.Repository;
 
 import com.uca.capas.domain.Student;
 
+@Repository
 public class StudentDAOImpl implements StudentDAO{
 	
 	@PersistenceContext(unitName="capas")
