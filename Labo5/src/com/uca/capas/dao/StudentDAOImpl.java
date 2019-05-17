@@ -8,6 +8,7 @@ import javax.persistence.EntityManager;
 
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.uca.capas.domain.Student;
 
@@ -32,6 +33,25 @@ public class StudentDAOImpl implements StudentDAO{
 		// TODO Auto-generated method stub
 		Student student = entityManager.find(Student.class, code);
 		return student;
+	}
+
+	@Transactional
+	public int save(Student s, Integer newRow) throws DataAccessException {
+		try {
+			if(newRow==1) entityManager.persist(s); //Si agrego una nueva fila, se usa persist
+			else entityManager.merge(s); //Si existe la fila, se usa merge
+			entityManager.flush();// Se sincroniza con la base de datos
+			return 1;
+		}catch(Throwable e) {
+			e.printStackTrace();
+			return 1;
+		}
+	}
+
+	@Override
+	public int delete(Student s) throws DataAccessException {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 	
 
