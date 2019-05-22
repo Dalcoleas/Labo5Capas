@@ -22,7 +22,7 @@ public class StudentDAOImpl implements StudentDAO{
 	public List<Student> findAll() throws DataAccessException {
 		// TODO Auto-generated method stub
 		StringBuffer sb = new StringBuffer();
-		sb.append("select * from public.student");
+		sb.append("select * from public.student order by id_student asc");
 		Query query = entityManager.createNativeQuery(sb.toString(),Student.class);
 		List <Student> resulset = query.getResultList();
 		return resulset;
@@ -48,9 +48,9 @@ public class StudentDAOImpl implements StudentDAO{
 		}
 	}
 
-	@Override
+	@Transactional
 	public int delete(Student s) throws DataAccessException {
-		// TODO Auto-generated method stub
+		
 		return 0;
 	}
 	

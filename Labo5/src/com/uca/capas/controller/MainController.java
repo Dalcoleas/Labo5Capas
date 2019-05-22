@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -15,6 +16,8 @@ import com.uca.capas.domain.*;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import javax.validation.Valid;
 
 
 
@@ -59,11 +62,20 @@ public class MainController {
 		return mav;
 	}
 	
-	@RequestMapping(value = "/save", method=RequestMethod.POST)
-	public ModelAndView insert() {
+	@RequestMapping(value="/save", method = RequestMethod.POST)
+	public ModelAndView saveStudent(@Valid @ModelAttribute("student") Student s, BindingResult r){
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("student",new Student());
-		mav.setViewName("form");
+		List<Student> students = null;
+		if(r.hasErrors()){
+			mav.setViewName("editStudent");
+		}
+		else{
+			studentDao.save(s, 0);
+			students = studentDao.findAll();
+			mav.addObject("students",students);
+			mav.setViewName("main");
+		}
+		
 		return mav;
 	}
 	
@@ -83,4 +95,14 @@ public class MainController {
 		mav.setViewName("main");
 		return mav;
 	}
+	
+	@RequestMapping("/editStudent")
+	public ModelAndView editarStudent(@RequestParam("cStudent") Integer cStudent){
+		ModelAndView mav = new ModelAndView();
+		Student s = studentDao.findOne(cStudent);
+		mav.addObject("student", s);
+		mav.setViewName("editStudent");
+		return mav;
+	}
+	
 }

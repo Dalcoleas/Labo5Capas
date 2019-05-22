@@ -11,6 +11,7 @@
 <body>
 	<table>
 		<tr>
+			<th>Accion</th>
 			<th>Name</th>
 			<th>Last Name</th>
 			<th>Age</th>
@@ -18,6 +19,8 @@
 		</tr>
 			<c:forEach items="${students}" var ="students">
 				<tr>
+					<td><input type="button" class="myButton" value="Editar"
+					onclick="location.href='${pageContext.request.contextPath}/editStudent?cStudent=${students.cStudent}'"></td>
 					<td>${students.sName}</td>
 					<td>${students.lName}</td>
 					<td>${students.sAge}</td>
