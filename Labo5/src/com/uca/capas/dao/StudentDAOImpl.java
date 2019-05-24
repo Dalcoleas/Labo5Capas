@@ -49,10 +49,11 @@ public class StudentDAOImpl implements StudentDAO{
 	}
 
 	@Transactional
-	public int delete(Student s) throws DataAccessException {
-		
-		return 0;
+	public void deleteByFirstName(String name) throws DataAccessException {
+		StringBuffer sb = new StringBuffer();
+		sb.append("delete from public.student where s_name = " + "'" + name + "'");
+		Query query = entityManager.createNativeQuery(sb.toString());
+		query.executeUpdate();
 	}
-	
 
 }

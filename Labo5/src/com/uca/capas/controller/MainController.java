@@ -79,6 +79,27 @@ public class MainController {
 		return mav;
 	}
 	
+	@RequestMapping(value = "/saveSt", method=RequestMethod.POST)
+	public ModelAndView insert() {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("student",new Student());
+		mav.setViewName("form");
+		return mav;
+	}
+	
+	@RequestMapping(value="/delete", method = RequestMethod.POST)
+	public ModelAndView deleteStudent(@RequestParam String name) {
+		ModelAndView mav = new ModelAndView();
+		Student s = null;
+		try {
+			studentDao.deleteByFirstName(name);
+		} catch(Exception e) {
+			log.info("Error"+e.toString());
+		}
+		mav.setViewName("eliminado");
+		return mav;
+	}
+	
 	@RequestMapping(value="/formData")
 	public ModelAndView save(@ModelAttribute Student s) {
 		ModelAndView mav = new ModelAndView();
