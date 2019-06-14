@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.uca.capas.dao.StudentDAO;
 import com.uca.capas.domain.*;
+import com.uca.capas.repositories.SectionRepository;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -27,6 +28,9 @@ public class MainController {
 	@Autowired
 	private StudentDAO studentDao;
 	
+	@Autowired
+	private SectionRepository sectionRepo;
+	
 	//Objeto Logger
 	static Logger log = Logger.getLogger(MainController.class.getName());
 	
@@ -37,7 +41,7 @@ public class MainController {
 		List<Student> students = null;
 		try {
 			//Se seleccionan todos los estudiantes
-			students = studentDao.findAll();
+			students = sectionRepo.findAll().get(1).getStudents();
 			log.info("Termino de buscar en la base de datos");
 		} 
 		catch (Exception e) {
@@ -125,5 +129,7 @@ public class MainController {
 		mav.setViewName("editStudent");
 		return mav;
 	}
+	
+	
 	
 }
